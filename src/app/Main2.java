@@ -19,7 +19,7 @@ public class Main2 {
 			numeriRandom.add((int) (Math.random() * 100));
 		}
 
-		System.out.println(numeriRandom);
+		Main2.logger.info("" + numeriRandom);
 		System.out.println(numeriRandom.size());
 
 		List<Integer> firstList = numeriRandom.subList(0, 1000);
@@ -34,19 +34,34 @@ public class Main2 {
 		ThreadsList t2 = new ThreadsList(secondList);
 		ThreadsList t3 = new ThreadsList(thirdList);
 
+		// COSI FACENDO LANCERò IN MODO SEQUENZIALE NON PARALLELO
+//		try {
+//			t1.start();
+//			t1.join();
+//			t2.start();
+//			t2.join();
+//			t3.start();
+//			t3.join();
+//		} catch (InterruptedException e) {
+//			System.out.println(e.getMessage());
+//		} 
+
+		// COSI FACENDO I THREAD VENGONO LANCIATI CONTEMPORANEAMNTE E POI SI ASPETTA CHE
+		// TUTTI TERMINO
+
 		try {
 			t1.start();
-			t1.join();
 			t2.start();
-			t2.join();
 			t3.start();
+			t1.join();
+			t2.join();
 			t3.join();
 		} catch (InterruptedException e) {
 			System.out.println(e.getMessage());
 		}
 
 		int result = t1.getResult() + t2.getResult() + t3.getResult();
-		Main2.logger.info("" + result);
+		Main2.logger.info(" " + result);
 
 	}
 

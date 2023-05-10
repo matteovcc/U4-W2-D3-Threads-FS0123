@@ -23,7 +23,7 @@ public class ThreadsList extends Thread {
 		for (Integer i : totalList) {
 			num += i;
 		}
-		System.out.println(num);
+		Main2.logger.info("la somma è :" + num);
 	}
 
 	public int getResult() {
