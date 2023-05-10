@@ -3,7 +3,12 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main2 {
+
+	public static Logger logger = LoggerFactory.getLogger(Main2.class);
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -22,10 +27,26 @@ public class Main2 {
 		List<Integer> thirdList = numeriRandom.subList(2000, 3000);
 
 		System.out.println(firstList.size());
+//		System.out.println(secondList.size());
+//		System.out.println(thirdList.size());
 
-		ThreadsList t1 = new ThreadsList();
-		ThreadsList t2 = new ThreadsList();
-		ThreadsList t3 = new ThreadsList();
+		ThreadsList t1 = new ThreadsList(firstList);
+		ThreadsList t2 = new ThreadsList(secondList);
+		ThreadsList t3 = new ThreadsList(thirdList);
+
+		try {
+			t1.start();
+			t1.join();
+			t2.start();
+			t2.join();
+			t3.start();
+			t3.join();
+		} catch (InterruptedException e) {
+			System.out.println(e.getMessage());
+		}
+
+		int result = t1.getResult() + t2.getResult() + t3.getResult();
+		Main2.logger.info("" + result);
 
 	}
 

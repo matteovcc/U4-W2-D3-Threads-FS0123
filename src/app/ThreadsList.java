@@ -1,5 +1,7 @@
 package app;
 
+import java.util.List;
+
 public class ThreadsList extends Thread {
 //	public ThreadsList(List<Integer> firstList) {
 //	}
@@ -7,5 +9,25 @@ public class ThreadsList extends Thread {
 //	public void run() {
 //		for (Integer i : numeriRandom)
 //	}
+
+	private List<Integer> totalList;
+
+	public ThreadsList(List<Integer> totalList) {
+		this.totalList = totalList;
+	}
+
+	public int num = 0;
+
+	@Override
+	public void run() {
+		for (Integer i : totalList) {
+			num += i;
+		}
+		System.out.println(num);
+	}
+
+	public int getResult() {
+		return num;
+	}
 
 }
